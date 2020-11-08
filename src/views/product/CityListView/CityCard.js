@@ -31,18 +31,18 @@ const useStyles = makeStyles((theme) => ({
   },
   statsIcon: {
     marginRight: theme.spacing(1),
+
   },
 }));
 
-const CityCard = (props) => {
+const CityCard = ({className, city,}) => {
   //Const
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   //Local State
-  const { city } = props;
-  const { location, current } = props.city;
+  const { location, current } = city;
 
   //Cities From Reducer
   const cities = useSelector((store) => store.cityReducer.cities);
@@ -57,7 +57,7 @@ const CityCard = (props) => {
   };
 
   return (
-    <Card className={clsx(classes.root, props.className)}>
+    <Card className={clsx(classes.root, className)}>
       {city && (
         <React.Fragment>
           <CardContent>
@@ -98,14 +98,14 @@ const CityCard = (props) => {
                 </Typography>
               </Grid>
               <Grid className={classes.statsItem} item>
-                <Tooltip title="Remove City">
+                <Tooltip title="Remove">
                   <Button onClick={handleCityRemove}>
                     <Delete className={classes.statsIcon} color="action" />
                   </Button>
                 </Tooltip>
               </Grid>
               <Grid className={classes.statsItem} item>
-                <Tooltip title="Remove City">
+                <Tooltip title="History">
                   <Button
                     onClick={() => navigate(`/app/city/${location.name}`)}
                   >
